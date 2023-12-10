@@ -114,7 +114,7 @@ def processar_eventos_menu(eventos):
                 selecionado_menu = (selecionado_menu + 1) % len(opcoes_menu)
             elif evento.key == pygame.K_RETURN:
                 if selecionado_menu == 0:
-                    estado_jogo = jogo
+                    estado_jogo = novo_jogo
                 elif selecionado_menu == 1:
                     estado_jogo = objetivo
                     draw_objetivo(screen)
@@ -154,5 +154,6 @@ screen = pygame.display.set_mode((width, height))
 load()
 main_loop(screen)
 pygame.quit()
+
 
 
