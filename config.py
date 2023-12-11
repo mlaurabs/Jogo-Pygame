@@ -29,7 +29,7 @@ def barra_de_vida(screen):
 
     if p.vida_atual <= -25:
         p.derrota = True
-    if ((p.tempo_atual/100) >= 30):
+    if ((p.tempo_atual/100) >= 20):
         p.derrota = True
 
 def chaves(screen):
