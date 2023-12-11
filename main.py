@@ -107,17 +107,19 @@ def processar_eventos_der(eventos):
                 draw_menu(screen)
 
 def draw_vitoria(screen):
+    
 
     image = pygame.image.load("Ganhou.png")
     image = pygame.transform.scale(image, (960, 660))
     screen.blit(image, (0, 0))
 
     fonte = pygame.font.Font("Fonte.ttf", 40) 
-    texto = "Ir para o menu"
+    texto = "Carregando Menu..."
     texto_surface = fonte.render(texto, True, (255, 255, 255))
     texto_retangulo = texto_surface.get_rect(center=(width -100, height -60))
     screen.blit(texto_surface, texto_retangulo) 
-    
+    pygame.display.update()
+     
 def processar_eventos_menu(eventos):
     global estado_jogo, selecionado_menu, objetivo
     variaveis_menu()
@@ -155,6 +157,11 @@ def main_loop(screen):
         elif(p.derrota == True):
             #p.novo_jogo()
             draw_derrota(screen)
+            estado_jogo = menu
+            time.sleep(4)
+        elif(p.vitoria == True):
+            #p.novo_jogo()
+            draw_vitoria(screen)
             estado_jogo = menu
             time.sleep(4)
         elif estado_jogo == novo_jogo:

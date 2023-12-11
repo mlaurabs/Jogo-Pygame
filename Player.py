@@ -151,7 +151,13 @@ def animacao_player(dt):
                     mapa[i][j] = str
                     pygame.display.update()
                     p.qtdChaves +=1
-
+                    
+    # verifica se o jogador está em contato com a chave  
+        tesouro = tesouro.get_rect(topleft=(j*32, i*32))
+            if jogador_rect.colliderect(tesouro):
+                if p.qtdChaves == 5:
+                    p.vitoria == True
+                    
 def getColisao():
     return colisao
 

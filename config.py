@@ -65,7 +65,7 @@ def formatar_tempo(tempo_em_milissegundos):
     return str(segundos)
 
 def cronometro(screen):
-    if (p.derrota == False):
+    if (p.derrota == False) or (p.vitoria == False):
         tempo_atual = pygame.time.get_ticks() - p.tempo_inicial
     else:
         tempo_atual = p.tempo_inicial
