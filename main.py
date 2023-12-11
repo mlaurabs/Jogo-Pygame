@@ -38,13 +38,7 @@ def load():
     
     sheets_player()
     sheets_mapa_1()
-<<<<<<< HEAD
             
-=======
-    
-    mapa_1()
-        
->>>>>>> c7ef9f61f49c280686e8ce87ef5d2175089515fa
 def update(dt):
     global old_x, old_y, direita, esquerda, cima, baixo, sentido, frames, spt_wdt, spt_hgt, anim_frame
     
@@ -144,10 +138,7 @@ def processar_eventos_menu(eventos):
                 if selecionado_menu == 0:
                     estado_jogo = novo_jogo
                     p.novo_jogo()
-<<<<<<< HEAD
                     mapa_1()
-=======
->>>>>>> c7ef9f61f49c280686e8ce87ef5d2175089515fa
                 elif selecionado_menu == 1:
                     estado_jogo = objetivo
                     draw_objetivo(screen)
@@ -159,11 +150,6 @@ def processar_eventos_menu(eventos):
 def main_loop(screen):
     global clock, estado_jogo, tesouroAberto
     while True:
-<<<<<<< HEAD
-=======
-        #p.tempo_inicial += 1
-        #print(p.tempo_inicial)
->>>>>>> c7ef9f61f49c280686e8ce87ef5d2175089515fa
         eventos = pygame.event.get()
         if estado_jogo == menu:
             processar_eventos_menu(eventos)

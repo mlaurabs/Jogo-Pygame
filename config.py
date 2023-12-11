@@ -23,10 +23,6 @@ vida_atual = 100
 def barra_de_vida(screen):
     global derrota
     pygame.draw.rect(screen, cor_barra_cheia, (posicao_barra[0], posicao_barra[1], largura_barra, altura_barra))
-<<<<<<< HEAD
-=======
-    print(p.vida_atual)
->>>>>>> c7ef9f61f49c280686e8ce87ef5d2175089515fa
     largura_atual = int((p.vida_atual / vida_maxima) * largura_barra)
     pygame.draw.rect(screen, cor_barra_vazia, (posicao_barra[0] + largura_atual, posicao_barra[1], largura_barra - largura_atual, altura_barra))
 
@@ -49,11 +45,7 @@ def cronometro(screen):
     fonte = pygame.font.Font("Fonte.ttf", 36)
     text = f'Tempo: {formatar_tempo(p.tempo_atual)}'
     texto = fonte.render(text, True, (255, 192, 0))
-<<<<<<< HEAD
     screen.blit(texto, (450, 20))
-=======
-    screen.blit(texto, (500, 20))
->>>>>>> c7ef9f61f49c280686e8ce87ef5d2175089515fa
     
 
     
