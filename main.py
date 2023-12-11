@@ -1,9 +1,10 @@
 import pygame
-from config import *
 from mapa import *
 from Player import *
 from inimigos import *
 from menu import *
+import variaviesGlobais as p
+import time
 
 pygame.init()
 
@@ -14,7 +15,6 @@ fonte_menu = pygame.font.Font("Fonte.ttf", 40)
 menu = 0
 novo_jogo = 1
 objetivo = 2
-derrota = False
 
 
 opcoes_menu = ['Novo Jogo','Objetivo', 'Sair']
@@ -24,15 +24,12 @@ selecionado_menu = 0
 estado_jogo = menu
 selecionado = 0
 
-anim_pos_x = 20 # x inicial
-anim_pos_y = 500 # y inicial
 #__________________________________________________________#
 
 
 def load():
-    global clock, mapa, texture1, texture2, texture3, bau, tocha, tesouro, key, direita, esquerda, cima, baixo, sentido, frames, spt_wdt, spt_hgt, jogador_rect, interCol
+    global clock
 
-    
   # frame por segundo
     clock = pygame.time.Clock()
     
@@ -42,16 +39,17 @@ def load():
     mapa_1()
         
 def update(dt):
-    global old_x, old_y, direita, esquerda, cima, baixo, sentido, frames, anim_pos_x, anim_pos_y, spt_wdt, spt_hgt, anim_frame, anim_time
+    global old_x, old_y, direita, esquerda, cima, baixo, sentido, frames, spt_wdt, spt_hgt, anim_frame, anim_time
     
-    old_x = anim_pos_x
-    old_y = anim_pos_y
+    old_x = p.anim_pos_x
+    old_y = p.anim_pos_y
     
-    # animacao personagem principal  + colisão      
-    animacao_player(dt)
+    # animacao personagem principal  + colisão
+    if(p.derrota == False):
+        animacao_player(dt)
+        animacao_inimigo(dt)
 
-    animacao_inimigo(dt)
-    
+
 def draw_screen(screen):
     global direita, esquerda, cima, baixo, sentido, frames, anim_pos_x, anim_pos_y, spt_wdt, spt_hgt, anim_frame
     draw_mapa(screen)
@@ -92,7 +90,6 @@ def draw_menu(screen):
         screen.blit(texto_surface, texto_rect)
 
 def draw_derrota(screen):
-
     image = pygame.image.load("Game_Over.png")
     image = pygame.transform.scale(image, (960, 660))
     screen.blit(image, (0, 0))
@@ -137,6 +134,7 @@ def processar_eventos_menu(eventos):
             elif evento.key == pygame.K_RETURN:
                 if selecionado_menu == 0:
                     estado_jogo = novo_jogo
+                    p.novo_jogo()
                 elif selecionado_menu == 1:
                     estado_jogo = objetivo
                     draw_objetivo(screen)
@@ -146,16 +144,20 @@ def processar_eventos_menu(eventos):
 
 def main_loop(screen):
     global clock, estado_jogo
-    
     while True:
         eventos = pygame.event.get()
         if estado_jogo == menu:
             processar_eventos_menu(eventos)
             draw_menu(screen)
-            reiniciar_jogo()
+            #reiniciar_jogo()
         elif estado_jogo == objetivo:
             processar_eventos_obj(eventos)
             draw_objetivo(screen)
+        elif(p.derrota == True):
+            #p.novo_jogo()
+            draw_derrota(screen)
+            #time.sleep(4)
+            estado_jogo = menu
         elif estado_jogo == novo_jogo:
             for evento in eventos:
                 if evento.type == pygame.KEYDOWN and evento.key == pygame.K_ESCAPE:

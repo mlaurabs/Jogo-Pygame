@@ -42,6 +42,7 @@ def getKey():
     return key
 
 def mapa_1():
+    global  row, col
     
     interCol = [0, 5, 10, 15, 20, 25, 29]
     
@@ -88,7 +89,6 @@ def mapa_1():
     mapa[13][22] = 'C'
 
     # interCol = [0, 5, 10, 15, 20, 25, 29]
-    aux = [0,0]
     row = 0
     col = 0
     for x in range(5): # espalhando as chaves aleatoriamente entre os trechos escolhidos
