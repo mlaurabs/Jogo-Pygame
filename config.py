@@ -32,6 +32,7 @@ def barra_de_vida(screen):
         texto_surface = fonte.render(texto, True, (255, 192, 0))
         texto_retangulo = texto_surface.get_rect(center=(width -100, height -60))
         screen.blit(texto_surface, texto_retangulo) 
+        reiniciar_jogo()
     else:
         pygame.draw.rect(screen, cor_barra_cheia, (posicao_barra[0], posicao_barra[1], largura_barra, altura_barra))
         largura_atual = int((vida_atual / vida_maxima) * largura_barra)
@@ -44,8 +45,20 @@ def chaves(screen):
     text = fonte.render(texto, True, (255, 192, 0))
     screen.blit(text, (720, 20))
     
-def reiniciar_jogo(dt):
+def reiniciar_jogo():
     
+    # personagem
     anim_pos_x = 20 # x inicial
     anim_pos_y = 270 # y inicial
-    
+    anim_frame = 1
+    anim_time = 0  # variavel para controle do tempo da animação
+    qtdChaves = 0 # variavel que vai atualizar a pontuação
+    vida_atual = 100
+    inim_pos_x_v1 = 200  # x inicial
+    inim_pos_y_v1 = 400  # y inicial
+    sentido_x_v1 = 1
+    sentido_y_v1 = 1
+    inim_pos_x_v2 = 400  # x inicial
+    inim_pos_y_v2 = 100  # y inicial
+    sentido_x_v2 = 1
+    sentido_y_v2 = 1

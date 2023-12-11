@@ -12,7 +12,7 @@ pygame.init()
 fonte_menu = pygame.font.Font("Fonte.ttf", 40)   
                                 
 menu = 0
-jogo = 1
+novo_jogo = 1
 objetivo = 2
 derrota = False
 
@@ -91,6 +91,25 @@ def draw_menu(screen):
         texto_rect = texto_surface.get_rect(center=(width // 2, height // 2.5 + i * 50))
         screen.blit(texto_surface, texto_rect)
 
+def draw_derrota(screen):
+
+    image = pygame.image.load("Game_Over.png")
+    image = pygame.transform.scale(image, (960, 660))
+    screen.blit(image, (0, 0))
+    fonte = pygame.font.Font("Fonte.ttf", 30) 
+    texto = "Ir para o menu"
+    texto_surface = fonte.render(texto, True, (255, 255, 255))
+    texto_retangulo = texto_surface.get_rect(center=(width -800, height -60))
+    screen.blit(texto_surface, texto_retangulo) 
+
+def processar_eventos_der(eventos):
+    global selecionado, estado_jogo, menu
+    for evento in eventos:
+        if evento.type == pygame.KEYDOWN:
+            if selecionado == 0:
+                estado_jogo = menu
+                draw_menu(screen)
+
 def draw_vitoria(screen):
 
     image = pygame.image.load("Ganhou.png")
@@ -133,10 +152,11 @@ def main_loop(screen):
         if estado_jogo == menu:
             processar_eventos_menu(eventos)
             draw_menu(screen)
+            reiniciar_jogo()
         elif estado_jogo == objetivo:
             processar_eventos_obj(eventos)
             draw_objetivo(screen)
-        elif estado_jogo == jogo:
+        elif estado_jogo == novo_jogo:
             for evento in eventos:
                 if evento.type == pygame.KEYDOWN and evento.key == pygame.K_ESCAPE:
                     estado_jogo = menu

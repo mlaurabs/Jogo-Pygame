@@ -161,7 +161,7 @@ def draw_player(screen):
     if(colisao == True):
         print("entrei na condição de explosão")
         colisao = False
-        vida_atual -= 25
+        vida_atual -= 125
         exp = getExplosao()
         screen.blit(exp, (anim_pos_x, anim_pos_y))
         # colocar o cavaleiro para longe da bomba com o impacto
