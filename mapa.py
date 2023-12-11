@@ -45,7 +45,11 @@ def getKey():
 
 def mapa_1():
     global  row, col
+<<<<<<< HEAD
     print("chamei mapa 1")
+=======
+    
+>>>>>>> c7ef9f61f49c280686e8ce87ef5d2175089515fa
     interCol = [0, 5, 10, 15, 20, 25, 29]
     
     for i in range(20):
