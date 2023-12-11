@@ -28,7 +28,7 @@ def sheets_player():
     for j in range(4):
         tupla = (j * spt_wdt, i * spt_hgt)
         cima.append(tupla)
-    print(cima)
+
 
     i = 2  # sentido para esquerda
     for j in range(4):
@@ -45,6 +45,11 @@ def sheets_player():
         tupla = (j * spt_wdt, i * spt_hgt)
         baixo.append(tupla)
 
+arquivo_ranking = "ranking.txt"
+# Função para salvar as pontuações em um arquivo.txt
+def salvar_ranking(ranking, tempo):
+    with open(arquivo_ranking, "a") as file:
+        file.write(f"\n{tempo}\n")
 
 # logica da movimentacao + colisoes
 def animacao_player(dt):
@@ -147,10 +152,10 @@ def animacao_player(dt):
                     
     # verifica se o jogador está em contato com o baú
     tresure = getTesouro()
-    if(p.qtdChaves == 1):
+    if(p.qtdChaves == 5):
         if jogador_rect.colliderect(tresure.get_rect(topleft=(835, 350))):
-            print("enostei no baú")
             p.vitoria = True
+            salvar_ranking(arquivo_ranking, (p.tempo_atual/100))
 
 def getColisao():
     return colisao
@@ -159,7 +164,6 @@ def getColisao():
 def draw_player(screen):
     global colisao
     if(colisao == True):
-        print("entrei na condição de explosão")
         colisao = False
         p.vida_atual -= 25
         time.sleep(0.1)

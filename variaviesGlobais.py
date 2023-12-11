@@ -1,7 +1,8 @@
-global anim_pos_x,anim_pos_y, anim_frame, anim_time, qtdChaves, inim_pos_x_v1, inim_pos_y_v1, sentido_x_v1, sentido_y_v1, inim_pos_x_v2, inim_pos_y_v2, sentido_x_v2, sentido_y_v2, vida_atual, derrota, tempo_inicial,  vitoria
+import time
+global anim_pos_x,anim_pos_y, anim_frame, anim_time, qtdChaves, inim_pos_x_v1, inim_pos_y_v1, sentido_x_v1, sentido_y_v1, inim_pos_x_v2, inim_pos_y_v2, sentido_x_v2, sentido_y_v2, vida_atual, derrota, tempo_inicial,  vitoria, tempo_atual
 
 def novo_jogo():
-    global anim_pos_x, anim_pos_y, anim_frame, anim_time, qtdChaves, inim_pos_x_v1, inim_pos_y_v1, sentido_x_v1, sentido_y_v1, inim_pos_x_v2, inim_pos_y_v2, sentido_x_v2, sentido_y_v2, vida_atual, derrota, tempo_inicial, vitoria
+    global anim_pos_x, anim_pos_y, anim_frame, anim_time, qtdChaves, inim_pos_x_v1, inim_pos_y_v1, sentido_x_v1, sentido_y_v1, inim_pos_x_v2, inim_pos_y_v2, sentido_x_v2, sentido_y_v2, vida_atual, derrota, tempo_inicial, vitoria, tempo_atual
     derrota = False
     vitoria = False
     anim_pos_x = 50
@@ -19,3 +20,4 @@ def novo_jogo():
     sentido_x_v2 = 1
     sentido_y_v2 = 1
     tempo_inicial = 0
+    tempo_atual = 0

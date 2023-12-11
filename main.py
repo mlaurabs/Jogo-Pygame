@@ -52,9 +52,6 @@ def update(dt):
         animacao_player(dt)
         animacao_inimigo(dt)
 
-    #p.tempo_inicial +=
-    #print(f"anim_time : {p.anim_time}")
-
 def draw_screen(screen):
     global direita, esquerda, cima, baixo, sentido, frames, anim_pos_x, anim_pos_y, spt_wdt, spt_hgt, anim_frame
     draw_mapa(screen)
@@ -150,41 +147,26 @@ def processar_eventos_menu(eventos):
                     pygame.quit()
                     exit()
 
-arquivo_ranking = "ranking.txt"
-
-# Função para carregar o ranking do arquivo
-def carregar_ranking():
-    ranking = []
-    if os.path.exists(arquivo_ranking):
-        with open(arquivo_ranking, "r") as file:
-            for line in file:
-                nome, tempo = line.strip().split(",")
-                ranking.append((nome, int(tempo)))
-    return ranking
-
-# Função para salvar o ranking no arquivo
-def salvar_ranking(ranking, nome, tempo):
-    with open(arquivo_ranking, "a") as file:
-        file.write(f"{nome},{tempo}\n")
 
 def main_loop(screen):
     global clock, estado_jogo, tesouroAberto
     while True:
-        p.tempo_inicial += 1
-        print(p.tempo_inicial)
+        #p.tempo_inicial += 1
+        #print(p.tempo_inicial)
         eventos = pygame.event.get()
         if estado_jogo == menu:
             processar_eventos_menu(eventos)
             draw_menu(screen)
-            #p.novo_jogo()
         elif estado_jogo == objetivo:
             processar_eventos_obj(eventos)
             draw_objetivo(screen)
         elif(p.derrota == True):
+            p.tempo_atual = p.tempo_inicial
             draw_derrota(screen)
             estado_jogo = menu
             time.sleep(4)
         elif(p.vitoria == True):
+            p.tempo_atual = p.tempo_inicial
             screen.blit(tesouroAberto, (835, 350))
             pygame.display.update()
             time.sleep(3)
@@ -192,6 +174,9 @@ def main_loop(screen):
             estado_jogo = menu
             time.sleep(4)
         elif estado_jogo == novo_jogo:
+            if(p.tempo_atual == 0):
+                p.tempo_atual = p.tempo_inicial
+            p.tempo_atual += 1
             for evento in eventos:
                 if evento.type == pygame.KEYDOWN and evento.key == pygame.K_ESCAPE:
                     estado_jogo = menu
