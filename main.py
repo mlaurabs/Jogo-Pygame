@@ -5,6 +5,7 @@ from inimigos import *
 from menu import *
 import variaviesGlobais as p
 import time
+import os
 
 pygame.init()
 
@@ -25,6 +26,7 @@ selecionado_menu = 0
 estado_jogo = menu
 selecionado = 0
 
+
 #__________________________________________________________#
 
 
@@ -40,15 +42,18 @@ def load():
     mapa_1()
         
 def update(dt):
-    global old_x, old_y, direita, esquerda, cima, baixo, sentido, frames, spt_wdt, spt_hgt, anim_frame, anim_time
+    global old_x, old_y, direita, esquerda, cima, baixo, sentido, frames, spt_wdt, spt_hgt, anim_frame
     
     old_x = p.anim_pos_x
     old_y = p.anim_pos_y
-    
+
     # animacao personagem principal  + colisão
     if(p.derrota == False):
         animacao_player(dt)
-        #animacao_inimigo(dt)
+        animacao_inimigo(dt)
+
+    #p.tempo_inicial +=
+    #print(f"anim_time : {p.anim_time}")
 
 def draw_screen(screen):
     global direita, esquerda, cima, baixo, sentido, frames, anim_pos_x, anim_pos_y, spt_wdt, spt_hgt, anim_frame
@@ -145,9 +150,28 @@ def processar_eventos_menu(eventos):
                     pygame.quit()
                     exit()
 
+arquivo_ranking = "ranking.txt"
+
+# Função para carregar o ranking do arquivo
+def carregar_ranking():
+    ranking = []
+    if os.path.exists(arquivo_ranking):
+        with open(arquivo_ranking, "r") as file:
+            for line in file:
+                nome, tempo = line.strip().split(",")
+                ranking.append((nome, int(tempo)))
+    return ranking
+
+# Função para salvar o ranking no arquivo
+def salvar_ranking(ranking, nome, tempo):
+    with open(arquivo_ranking, "a") as file:
+        file.write(f"{nome},{tempo}\n")
+
 def main_loop(screen):
     global clock, estado_jogo, tesouroAberto
     while True:
+        p.tempo_inicial += 1
+        print(p.tempo_inicial)
         eventos = pygame.event.get()
         if estado_jogo == menu:
             processar_eventos_menu(eventos)
@@ -157,7 +181,6 @@ def main_loop(screen):
             processar_eventos_obj(eventos)
             draw_objetivo(screen)
         elif(p.derrota == True):
-            #p.novo_jogo()
             draw_derrota(screen)
             estado_jogo = menu
             time.sleep(4)

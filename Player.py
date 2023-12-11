@@ -15,7 +15,6 @@ baixo = []  # vetor de imagens - baixo
 colisao = False
 sentido = "r"
 colide = []
-
 p.novo_jogo()
 def sheets_player():
     global frames, spt_wdt, spt_hgt, direita, esquerda, cima
@@ -148,11 +147,11 @@ def animacao_player(dt):
                     
     # verifica se o jogador está em contato com o baú
     tresure = getTesouro()
-    if(p.qtdChaves == 5):
+    if(p.qtdChaves == 1):
         if jogador_rect.colliderect(tresure.get_rect(topleft=(835, 350))):
             print("enostei no baú")
             p.vitoria = True
-                    
+
 def getColisao():
     return colisao
 

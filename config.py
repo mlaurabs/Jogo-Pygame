@@ -64,13 +64,31 @@ def formatar_tempo(tempo_em_milissegundos):
     segundos %= 60
     return str(segundos)
 
-def cronometro(screen):
-    if (p.derrota == False) or (p.vitoria == False):
-        tempo_atual = pygame.time.get_ticks() - p.tempo_inicial
+"""
+while True:
+    current_ticks = pygame.time.get_ticks()
+
+    # [...]
+
+    if not game_over:
+        ticks = current_ticks - start_ticks
+        # [...]
+
     else:
-        tempo_atual = p.tempo_inicial
+        start_ticks = current_ticks
+        # [...]
+"""
+
+def cronometro(screen):
+
+    """current_time = pygame.time.get_ticks()
+    if(p.tempo_inicial == 0):
+        tempo_atual = current_time - p.tempo_inicial
+    else:
+        tempo_atual = p.tempo_inicial + pygame.time.get_ticks()
+        p.tempo_inicial = 1"""
     fonte = pygame.font.Font("Fonte.ttf", 36)
-    text = f'Tempo: {formatar_tempo(tempo_atual)}'
+    text = f'Tempo: {formatar_tempo(p.tempo_inicial)}'
     texto = fonte.render(text, True, (255, 192, 0))
     screen.blit(texto, (500, 20))
     
