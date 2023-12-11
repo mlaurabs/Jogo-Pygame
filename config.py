@@ -29,19 +29,9 @@ def barra_de_vida(screen):
     largura_atual = int((p.vida_atual / vida_maxima) * largura_barra)
     pygame.draw.rect(screen, cor_barra_vazia, (posicao_barra[0] + largura_atual, posicao_barra[1], largura_barra - largura_atual, altura_barra))
 
-          
     if p.vida_atual <= -25:
         print("perdeu")
         p.derrota = True
-        """image = pygame.image.load("Objetivo.png")
-        image = pygame.transform.scale(image, (960, 660))
-        screen.blit(image, (0, 0))
-        fonte = pygame.font.Font("Fonte.ttf", 40) 
-        texto = "Voltar"
-        texto_surface = fonte.render(texto, True, (255, 192, 0))
-        texto_retangulo = texto_surface.get_rect(center=(width -100, height -60))
-        screen.blit(texto_surface, texto_retangulo)"""
-        #reiniciar_jogo()
 
 
 def chaves(screen):
@@ -71,10 +61,7 @@ def reiniciar_jogo():
 
 def formatar_tempo(tempo_em_milissegundos):
     segundos = tempo_em_milissegundos // 1000
-    minutos = segundos // 60
     segundos %= 60
-    milissegundos = tempo_em_milissegundos % 1000
-    print(str(segundos))
     return str(segundos)
 
 def cronometro(screen):
@@ -85,7 +72,7 @@ def cronometro(screen):
     fonte = pygame.font.Font("Fonte.ttf", 36)
     text = f'Tempo: {formatar_tempo(tempo_atual)}'
     texto = fonte.render(text, True, (255, 192, 0))
-    screen.blit(texto, (550, 20))
+    screen.blit(texto, (500, 20))
     
 
     
