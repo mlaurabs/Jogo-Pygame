@@ -16,7 +16,6 @@ novo_jogo = 1
 objetivo = 2
 derrota = False
 
-
 opcoes_menu = ['Novo Jogo','Objetivo', 'Sair']
 
 selecionado_menu = 0
@@ -100,7 +99,8 @@ def draw_derrota(screen):
     texto = "Ir para o menu"
     texto_surface = fonte.render(texto, True, (255, 255, 255))
     texto_retangulo = texto_surface.get_rect(center=(width -800, height -60))
-    screen.blit(texto_surface, texto_retangulo) 
+    screen.blit(texto_surface, texto_retangulo)
+    pygame.display.update()
 
 def processar_eventos_der(eventos):
     global selecionado, estado_jogo, menu
@@ -165,7 +165,7 @@ def main_loop(screen):
             update(clock.get_time())
             
             draw_screen(screen)
-
+            cronometro(screen)
         pygame.display.update()
         clock.tick(60)
         
