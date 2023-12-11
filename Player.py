@@ -2,7 +2,7 @@ import pygame
 
 import time
 import variaviesGlobais
-from mapa import *
+from mapa import getTesouro, getKey, mapa
 from config import *
 from inimigos import getBomba_V1, getBomba_V2, getInimsPos, getExplosao
 import variaviesGlobais as p
@@ -12,12 +12,6 @@ direita = []  # vetor de imagens - sentido direita
 esquerda = []  # vetor de imagens - sentido esquerda
 cima = []  # vetor de imagens - sentido cima
 baixo = []  # vetor de imagens - baixo
-#anim_frame = 1
-#anim_time = 0  # variavel para controle do tempo da animação
-#qtdChaves = 0 # variavel que vai atualizar a pontuação
-#anim_pos_x = 20 # x inicial
-#anim_pos_y = 270 # y inicial
-#vida_atual = 100
 colisao = False
 sentido = "r"
 colide = []
@@ -152,22 +146,15 @@ def animacao_player(dt):
                     pygame.display.update()
                     p.qtdChaves +=1
                     
-    # verifica se o jogador está em contato com a chave  
-        tesouro = tesouro.get_rect(topleft=(j*32, i*32))
-            if jogador_rect.colliderect(tesouro):
-                if p.qtdChaves == 5:
-                    p.vitoria == True
+    # verifica se o jogador está em contato com o baú
+    tresure = getTesouro()
+    if(p.qtdChaves == 5):
+        if jogador_rect.colliderect(tresure.get_rect(topleft=(835, 350))):
+            print("enostei no baú")
+            p.vitoria = True
                     
 def getColisao():
     return colisao
-
-def getQtdChaves(): # retorna a quantidade de chaves do momento
-    pass
-    #return qtdChaves
-
-def getVidaAtual(): # retorna a quantidade de chaves do momento
-    pass
-    #return vida_atual
 
 # desenha o personagem animado na tela
 def draw_player(screen):

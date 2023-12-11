@@ -37,6 +37,8 @@ def escoheAleatorio(linha, coluna):
     aux = random.randint(0, 5)
     j = coluna[aux]
     return [i,j]
+def getTesouro():
+    return tesouro
 
 def getKey():
     return key
@@ -125,7 +127,7 @@ def draw_mapa(screen):
             elif('K' in mapa[i][j]):
                 screen.blit(textura1, ((j * 32), (i * 32)))
                 screen.blit(key, ((j * 32), (i * 32)))
-    screen.blit(tesouro, (850, 570))
+    screen.blit(tesouro, (835, 350))
 
 
 

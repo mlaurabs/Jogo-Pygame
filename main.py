@@ -10,8 +10,10 @@ pygame.init()
 
 # a 
 #_________________________Variaveis__________________________#
-fonte_menu = pygame.font.Font("Fonte.ttf", 40)   
-                                
+fonte_menu = pygame.font.Font("Fonte.ttf", 40)
+tesouroAberto = pygame.image.load("images/Tesouro_Aberto.png")
+tesouroAberto = pygame.transform.scale(tesouroAberto, (80, 60))
+
 menu = 0
 novo_jogo = 1
 objetivo = 2
@@ -46,7 +48,7 @@ def update(dt):
     # animacao personagem principal  + colisão
     if(p.derrota == False):
         animacao_player(dt)
-        animacao_inimigo(dt)
+        #animacao_inimigo(dt)
 
 def draw_screen(screen):
     global direita, esquerda, cima, baixo, sentido, frames, anim_pos_x, anim_pos_y, spt_wdt, spt_hgt, anim_frame
@@ -116,7 +118,7 @@ def draw_vitoria(screen):
     fonte = pygame.font.Font("Fonte.ttf", 40) 
     texto = "Carregando Menu..."
     texto_surface = fonte.render(texto, True, (255, 255, 255))
-    texto_retangulo = texto_surface.get_rect(center=(width -100, height -60))
+    texto_retangulo = texto_surface.get_rect(center=(width - 200, height -60))
     screen.blit(texto_surface, texto_retangulo) 
     pygame.display.update()
      
@@ -144,7 +146,7 @@ def processar_eventos_menu(eventos):
                     exit()
 
 def main_loop(screen):
-    global clock, estado_jogo
+    global clock, estado_jogo, tesouroAberto
     while True:
         eventos = pygame.event.get()
         if estado_jogo == menu:
@@ -160,7 +162,9 @@ def main_loop(screen):
             estado_jogo = menu
             time.sleep(4)
         elif(p.vitoria == True):
-            #p.novo_jogo()
+            screen.blit(tesouroAberto, (835, 350))
+            pygame.display.update()
+            time.sleep(3)
             draw_vitoria(screen)
             estado_jogo = menu
             time.sleep(4)
